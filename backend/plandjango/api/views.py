@@ -1,8 +1,13 @@
 from django.shortcuts import render
 from .models import Plan
 from .serializers import PlanSerializer
-from rest_framework.generics import ListAPIView,CreateAPIView,DestroyAPIView
+from django.views.decorators.csrf import csrf_exempt
+
+
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView
 # Create your views here.
+
+
 
 class PlanList(ListAPIView):
     queryset = Plan.objects.all()
@@ -17,4 +22,4 @@ class PlanCreate(CreateAPIView):
 class PlanDestroy(DestroyAPIView):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer
-
+    lookup_field = 'id'
